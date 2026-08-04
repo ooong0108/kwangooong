@@ -1,305 +1,137 @@
-/* ==========================================
-   Wedding Gallery
-========================================== */
-
-const TOTAL_IMAGES = 40;
-const IMAGE_PATH = "images";
+const imageFiles = [
+"YUH00087.JPG",
+"YUH00167.JPG",
+"YUH00239.JPG",
+"YUH00311.JPG",
+"YUH00322.JPG",
+"YUH00387.JPG",
+"YUH01177.JPG",
+"YUH01347.JPG",
+"YUH01353.JPG",
+"YUH01642.JPG",
+"YUH01660.JPG",
+"YUH01980.JPG",
+"YUH02024.JPG",
+"YUH02232.JPG",
+"YUH02325.JPG",
+"YUH02357.JPG",
+"YUH02406.JPG",
+"YUH02448.JPG",
+"YUH02497.JPG",
+"YUH02555.JPG",
+"YUH02564.JPG",
+"YUH02941.JPG",
+"YUH03026.JPG",
+"YUH03140.JPG",
+"YUH03277.JPG",
+"YUH03330.JPG",
+"YUH03467.JPG",
+"YUH03533.JPG",
+"YUH03565.JPG",
+"YUH03603.JPG"
+];
 
 const grid = document.querySelector(".grid");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+const counter = document.getElementById("counter");
 
-let currentIndex = 0;
-let startX = 0;
+let current = 0;
 
-/* ==========================================
-   Create Gallery
-========================================== */
-
-for (let i = 1; i <= TOTAL_IMAGES; i++) {
-
-    const number = String(i).padStart(2, "0");
+imageFiles.forEach((file, index) => {
 
     const photo = document.createElement("div");
-    photo.className = "photo reveal";
+    photo.className = "photo";
 
     const img = document.createElement("img");
-
-    img.src = `${IMAGE_PATH}/${number}.jpg`;
+    img.src = "images/" + file;
     img.loading = "lazy";
-    img.alt = `Wedding ${number}`;
 
-    img.onload = () => {
-        photo.classList.add("loaded");
+    img.onclick = () => {
+        current = index;
+        showImage();
     };
 
     photo.appendChild(img);
     grid.appendChild(photo);
-}
 
-/* ==========================================
-   Lightbox
-========================================== */
+});
 
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightbox-image");
+function showImage() {
 
-const closeBtn = document.getElementById("close");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-const counter = document.getElementById("counter");
+    lightbox.style.display = "flex";
 
-const photos = () => [...document.querySelectorAll(".photo img")];
+    lightboxImage.src = "images/" + imageFiles[current];
 
-/* ==========================================
-   Open
-========================================== */
-
-function openLightbox(index){
-
-    currentIndex = index;
-
-    lightbox.classList.add("active");
-
-    updateImage();
-
-    document.body.style.overflow = "hidden";
+    counter.textContent =
+        `${current + 1} / ${imageFiles.length}`;
 
 }
 
-/* ==========================================
-   Close
-========================================== */
+document.getElementById("close").onclick = () => {
 
-function closeLightbox(){
+    lightbox.style.display = "none";
 
-    lightbox.classList.remove("active");
+};
 
-    document.body.style.overflow = "";
+document.getElementById("next").onclick = () => {
 
-}
+    current++;
 
-/* ==========================================
-   Update
-========================================== */
+    if(current >= imageFiles.length){
 
-function updateImage(){
-
-    const items = photos();
-
-    lightboxImage.src = items[currentIndex].src;
-
-    counter.innerText =
-        `${currentIndex + 1} / ${items.length}`;
-
-}
-
-/* ==========================================
-   Next
-========================================== */
-
-function nextImage(){
-
-    const items = photos();
-
-    currentIndex++;
-
-    if(currentIndex >= items.length){
-
-        currentIndex = 0;
+        current = 0;
 
     }
 
-    updateImage();
+    showImage();
 
-}
+};
 
-/* ==========================================
-   Prev
-========================================== */
+document.getElementById("prev").onclick = () => {
 
-function prevImage(){
+    current--;
 
-    const items = photos();
+    if(current < 0){
 
-    currentIndex--;
-
-    if(currentIndex < 0){
-
-        currentIndex = items.length - 1;
+        current = imageFiles.length - 1;
 
     }
 
-    updateImage();
+    showImage();
 
-}
+};
 
-/* ==========================================
-   Click Event
-========================================== */
+document.addEventListener("keydown", e=>{
 
-document.addEventListener("click",(e)=>{
+    if(lightbox.style.display!=="flex") return;
 
-    if(e.target.matches(".photo img")){
+    if(e.key==="ArrowRight"){
 
-        const index = photos().indexOf(e.target);
+        document.getElementById("next").click();
 
-        openLightbox(index);
+    }
+
+    if(e.key==="ArrowLeft"){
+
+        document.getElementById("prev").click();
+
+    }
+
+    if(e.key==="Escape"){
+
+        document.getElementById("close").click();
 
     }
 
 });
-
-/* ==========================================
-   Buttons
-========================================== */
-
-closeBtn.onclick = closeLightbox;
-
-nextBtn.onclick = nextImage;
-
-prevBtn.onclick = prevImage;
-
-/* ==========================================
-   Background Click
-========================================== */
 
 lightbox.addEventListener("click",(e)=>{
 
-    if(e.target === lightbox){
+    if(e.target===lightbox){
 
-        closeLightbox();
-
-    }
-
-});
-
-/* ==========================================
-   Keyboard
-========================================== */
-
-document.addEventListener("keydown",(e)=>{
-
-    if(!lightbox.classList.contains("active")) return;
-
-    if(e.key==="Escape") closeLightbox();
-
-    if(e.key==="ArrowRight") nextImage();
-
-    if(e.key==="ArrowLeft") prevImage();
-
-});
-
-/* ==========================================
-   Swipe
-========================================== */
-
-lightbox.addEventListener("touchstart",(e)=>{
-
-    startX = e.touches[0].clientX;
-
-});
-
-lightbox.addEventListener("touchend",(e)=>{
-
-    const endX = e.changedTouches[0].clientX;
-
-    const distance = endX - startX;
-
-    if(distance > 70){
-
-        prevImage();
-
-    }
-
-    if(distance < -70){
-
-        nextImage();
+        lightbox.style.display="none";
 
     }
 
 });
-
-/* ==========================================
-   Fade Animation
-========================================== */
-
-const observer = new IntersectionObserver(
-
-(entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.add("active");
-
-}
-
-});
-
-},
-
-{
-
-threshold:0.15
-
-}
-
-);
-
-function observePhotos(){
-
-document
-.querySelectorAll(".reveal")
-.forEach(item=>observer.observe(item));
-
-}
-
-observePhotos();
-
-/* ==========================================
-   Image Error
-========================================== */
-
-document.addEventListener("error",(e)=>{
-
-if(e.target.tagName==="IMG"){
-
-e.target.style.display="none";
-
-}
-
-},true);
-
-/* ==========================================
-   Prevent Drag
-========================================== */
-
-document.addEventListener("dragstart",(e)=>{
-
-e.preventDefault();
-
-});
-
-/* ==========================================
-   Double Tap Zoom Prevent
-========================================== */
-
-let lastTouchEnd = 0;
-
-document.addEventListener("touchend",(event)=>{
-
-const now = Date.now();
-
-if(now-lastTouchEnd<=300){
-
-event.preventDefault();
-
-}
-
-lastTouchEnd=now;
-
-},{passive:false});
-
-/* ==========================================
-   End
-========================================== */
