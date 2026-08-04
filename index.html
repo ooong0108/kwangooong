@@ -2,92 +2,22 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>축하의 마음 전하기</title>
-<style>
-body{margin:0;background:#f6f2ed;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#444}
-.wrap{max-width:480px;margin:40px auto;padding:24px}
-.card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-h1{text-align:center;font-size:26px;font-weight:500;margin:0 0 22px}
-details{border:1px solid #ece5dd;border-radius:12px;margin:12px 0;overflow:hidden}
-summary{list-style:none;padding:16px 18px;font-weight:700;cursor:pointer;background:#faf8f5}
-summary::-webkit-details-marker{display:none}
-.item{padding:16px 18px;border-top:1px solid #f1ece6}
-.name{font-weight:700}
-.bank{margin:6px 0 10px;color:#777}
-button{width:100%;padding:12px;border:none;border-radius:10px;background:#b89b7a;color:#fff;font-size:15px;cursor:pointer}
-button:hover{opacity:.95}
-.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#333;color:#fff;padding:12px 18px;border-radius:999px;opacity:0;transition:.25s}
-.toast.show{opacity:1}
-.small{font-size:12px;color:#999;text-align:center;margin-top:18px}
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gallery</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
-<div class="card">
-<h1>축하의 마음 전하기</h1>
+<header><h1>Gallery</h1><p>우리의 순간들</p></header>
+<main>
+<div id="gallery" class="gallery"></div>
+</main>
 
-<details>
-<summary>▼ 신랑측 계좌</summary>
-
-<div class="item">
-<div class="name">신랑 홍길동</div>
-<div class="bank">카카오뱅크<br>3333-12-3456789</div>
-<button onclick="copy('3333123456789')">계좌번호 복사</button>
+<div id="lightbox" class="lightbox hidden">
+<button id="prev">&#10094;</button>
+<img id="lightboxImg" src="" alt="">
+<button id="next">&#10095;</button>
+<button id="close" class="close">&times;</button>
 </div>
-
-<div class="item">
-<div class="name">아버지 홍○○</div>
-<div class="bank">국민은행<br>123-456-789012</div>
-<button onclick="copy('123456789012')">계좌번호 복사</button>
-</div>
-
-<div class="item">
-<div class="name">어머니 김○○</div>
-<div class="bank">신한은행<br>110-123-456789</div>
-<button onclick="copy('110123456789')">계좌번호 복사</button>
-</div>
-</details>
-
-<details>
-<summary>▼ 신부측 계좌</summary>
-
-<div class="item">
-<div class="name">신부 김○○</div>
-<div class="bank">카카오뱅크<br>3333-98-765432</div>
-<button onclick="copy('333398765432')">계좌번호 복사</button>
-</div>
-
-<div class="item">
-<div class="name">아버지 김○○</div>
-<div class="bank">국민은행<br>987-654-321098</div>
-<button onclick="copy('987654321098')">계좌번호 복사</button>
-</div>
-
-<div class="item">
-<div class="name">어머니 이○○</div>
-<div class="bank">신한은행<br>555-666-777888</div>
-<button onclick="copy('555666777888')">계좌번호 복사</button>
-</div>
-</details>
-
-<div class="small">계좌번호와 이름은 HTML에서 자유롭게 수정할 수 있습니다.</div>
-</div>
-</div>
-
-<div id="toast" class="toast">✔ 계좌번호가 복사되었습니다.</div>
-
-<script>
-async function copy(text){
-  try{
-    await navigator.clipboard.writeText(text);
-    const t=document.getElementById("toast");
-    t.classList.add("show");
-    setTimeout(()=>t.classList.remove("show"),1800);
-  }catch(e){
-    alert("복사에 실패했습니다.");
-  }
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
