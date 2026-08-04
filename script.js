@@ -1,4 +1,4 @@
-const imageFiles = [
+const images = [
 "YUH00087.JPG",
 "YUH00167.JPG",
 "YUH00239.JPG",
@@ -31,106 +31,148 @@ const imageFiles = [
 "YUH03603.JPG"
 ];
 
-const grid = document.querySelector(".grid");
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightbox-image");
-const counter = document.getElementById("counter");
+const gallery = document.getElementById("gallery");
+const viewer = document.getElementById("viewer");
+const viewerImage = document.getElementById("viewerImage");
+const count = document.getElementById("count");
+
+const closeBtn = document.getElementById("close");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
 let current = 0;
 
-imageFiles.forEach((file, index) => {
+// 갤러리 생성
+images.forEach((file, index)=>{
 
     const photo = document.createElement("div");
     photo.className = "photo";
 
     const img = document.createElement("img");
-    img.src = "images/" + file;
+
+    img.src = `images/${file}`;
+    img.alt = `photo ${index+1}`;
     img.loading = "lazy";
 
-    img.onclick = () => {
+    img.addEventListener("click",()=>{
+
         current = index;
-        showImage();
-    };
+
+        openViewer();
+
+    });
 
     photo.appendChild(img);
-    grid.appendChild(photo);
+
+    gallery.appendChild(photo);
 
 });
 
-function showImage() {
+function openViewer(){
 
-    lightbox.style.display = "flex";
+    viewer.classList.add("active");
 
-    lightboxImage.src = "images/" + imageFiles[current];
+    updateViewer();
 
-    counter.textContent =
-        `${current + 1} / ${imageFiles.length}`;
+    document.body.style.overflow="hidden";
 
 }
 
-document.getElementById("close").onclick = () => {
+function closeViewer(){
 
-    lightbox.style.display = "none";
+    viewer.classList.remove("active");
 
-};
+    document.body.style.overflow="";
 
-document.getElementById("next").onclick = () => {
+}
+
+function updateViewer(){
+
+    viewerImage.src = `images/${images[current]}`;
+
+    count.textContent =
+        `${current+1} / ${images.length}`;
+
+}
+
+function next(){
 
     current++;
 
-    if(current >= imageFiles.length){
+    if(current>=images.length){
 
-        current = 0;
+        current=0;
 
     }
 
-    showImage();
+    updateViewer();
 
-};
+}
 
-document.getElementById("prev").onclick = () => {
+function prev(){
 
     current--;
 
-    if(current < 0){
+    if(current<0){
 
-        current = imageFiles.length - 1;
+        current=images.length-1;
 
     }
 
-    showImage();
+    updateViewer();
+
+}
+
+nextBtn.onclick = next;
+
+prevBtn.onclick = prev;
+
+closeBtn.onclick = closeViewer;
+
+viewer.onclick=(e)=>{
+
+    if(e.target===viewer){
+
+        closeViewer();
+
+    }
 
 };
 
-document.addEventListener("keydown", e=>{
+document.addEventListener("keydown",(e)=>{
 
-    if(lightbox.style.display!=="flex") return;
+    if(!viewer.classList.contains("active")) return;
 
-    if(e.key==="ArrowRight"){
+    if(e.key==="ArrowRight") next();
 
-        document.getElementById("next").click();
+    if(e.key==="ArrowLeft") prev();
 
-    }
-
-    if(e.key==="ArrowLeft"){
-
-        document.getElementById("prev").click();
-
-    }
-
-    if(e.key==="Escape"){
-
-        document.getElementById("close").click();
-
-    }
+    if(e.key==="Escape") closeViewer();
 
 });
 
-lightbox.addEventListener("click",(e)=>{
+// 모바일 스와이프
+let startX = 0;
 
-    if(e.target===lightbox){
+viewer.addEventListener("touchstart",(e)=>{
 
-        lightbox.style.display="none";
+    startX = e.touches[0].clientX;
+
+});
+
+viewer.addEventListener("touchend",(e)=>{
+
+    const endX = e.changedTouches[0].clientX;
+
+    if(endX-startX>60){
+
+        prev();
+
+    }
+
+    if(startX-endX>60){
+
+        next();
 
     }
 
