@@ -2,33 +2,96 @@
 <html lang="ko">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
 <title>Wedding Gallery</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="style.css">
+
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
 </head>
 
 <body>
 
 <header class="hero">
-    <img src="gallery_header.png">
+
+<img
+src="gallery_header.png"
+alt="Wedding">
+
 </header>
 
-<div id="gallery" class="gallery"></div>
+<section
+class="gallery"
+id="gallery">
 
-<button id="moreBtn">
+</section>
+
+<div
+class="more-wrap">
+
+<button
+id="moreBtn">
+
 ∨ MORE
+
 </button>
 
-<div id="lightbox">
+</div>
 
-<img id="lightboxImg">
+<div
+id="viewer"
+class="viewer">
+
+<div
+class="viewer-top">
+
+<button
+id="closeBtn">
+
+✕
+
+</button>
 
 </div>
+
+<div
+class="swiper">
+
+<div
+class="swiper-wrapper"
+id="swiperWrapper">
+
+</div>
+
+</div>
+
+<div
+class="viewer-bottom">
+
+<span
+id="counter">
+
+1 / 30
+
+</span>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
