@@ -3,18 +3,14 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Wedding Gallery</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 
@@ -22,94 +18,66 @@
 
 <body>
 
-<!-- 배경 -->
+<header class="hero">
 
-<div class="background"></div>
+    <div class="hero-inner">
 
-<!-- 메인 -->
+        <p class="small">
+            WEDDING GALLERY
+        </p>
 
-<main>
+        <h1>
+            홍길동
+            <span>&</span>
+            김하나
+        </h1>
 
-<section class="hero">
+        <p class="date">
+            2027.03.27 SAT
+        </p>
 
-<p class="sub">Wedding Gallery</p>
+    </div>
 
-<h1>
+</header>
 
-신랑 홍길동<br>
-<span>&</span><br>
-신부 김하나
-
-</h1>
-
-<p class="date">
-
-2027.03.27 SAT
-
-</p>
-
-</section>
-
-<!-- 소개 -->
 
 <section class="intro">
 
-<h2>우리의 순간</h2>
+    <h2>
+        우리의 순간
+    </h2>
 
-<p>
+    <p>
 
-가장 행복했던 순간들을<br>
-천천히 담았습니다.
+        가장 행복했던 순간을<br>
+        함께 나누고 싶습니다.
 
-</p>
+    </p>
 
 </section>
 
-<!-- 갤러리 -->
 
 <section class="gallery">
 
-<div class="grid">
-
-<!-- 사진은 script.js에서 자동 생성 -->
-
-</div>
+    <div id="gallery"></div>
 
 </section>
 
-</main>
 
-<!-- 라이트박스 -->
+<div id="viewer">
 
-<div id="lightbox">
+    <span id="close">✕</span>
 
-<button id="close">
+    <span id="prev">❮</span>
 
-✕
+    <img id="viewerImage">
 
-</button>
+    <span id="next">❯</span>
 
-<button id="prev">
-
-❮
-
-</button>
-
-<img id="lightbox-image">
-
-<button id="next">
-
-❯
-
-</button>
-
-<div id="counter">
-
-1 / 40
+    <div id="count"></div>
 
 </div>
 
-</div>
 
 <script src="script.js"></script>
 
