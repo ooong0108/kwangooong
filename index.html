@@ -1,97 +1,117 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport"
-content="width=device-width,initial-scale=1">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Wedding Gallery</title>
 
-<link rel="stylesheet"
-href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<header class="hero">
+<!-- 배경 -->
 
-<img
-src="gallery_header.png"
-alt="Wedding">
+<div class="background"></div>
 
-</header>
+<!-- 메인 -->
 
-<section
-class="gallery"
-id="gallery">
+<main>
+
+<section class="hero">
+
+<p class="sub">Wedding Gallery</p>
+
+<h1>
+
+신랑 홍길동<br>
+<span>&</span><br>
+신부 김하나
+
+</h1>
+
+<p class="date">
+
+2027.03.27 SAT
+
+</p>
 
 </section>
 
-<div
-class="more-wrap">
+<!-- 소개 -->
 
-<button
-id="moreBtn">
+<section class="intro">
 
-∨ MORE
+<h2>우리의 순간</h2>
 
-</button>
+<p>
+
+가장 행복했던 순간들을<br>
+천천히 담았습니다.
+
+</p>
+
+</section>
+
+<!-- 갤러리 -->
+
+<section class="gallery">
+
+<div class="grid">
+
+<!-- 사진은 script.js에서 자동 생성 -->
 
 </div>
 
-<div
-id="viewer"
-class="viewer">
+</section>
 
-<div
-class="viewer-top">
+</main>
 
-<button
-id="closeBtn">
+<!-- 라이트박스 -->
+
+<div id="lightbox">
+
+<button id="close">
 
 ✕
 
 </button>
 
-</div>
+<button id="prev">
 
-<div
-class="swiper">
+❮
 
-<div
-class="swiper-wrapper"
-id="swiperWrapper">
+</button>
 
-</div>
+<img id="lightbox-image">
 
-</div>
+<button id="next">
 
-<div
-class="viewer-bottom">
+❯
 
-<span
-id="counter">
+</button>
 
-1 / 30
+<div id="counter">
 
-</span>
+1 / 40
 
 </div>
 
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
