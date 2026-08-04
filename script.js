@@ -33,29 +33,27 @@ const files = [
 
 const gallery = document.getElementById("gallery");
 const moreBtn = document.getElementById("moreBtn");
-
 const viewer = document.getElementById("viewer");
-const viewerImage = document.getElementById("viewerImage");
-const closeViewer = document.getElementById("closeViewer");
+const closeBtn = document.getElementById("closeBtn");
+const wrapper = document.getElementById("swiperWrapper");
+const counter = document.getElementById("counter");
 
-// 이미지 생성
+let swiper;
+
+// 갤러리 생성
 files.forEach((file, index) => {
 
     const img = document.createElement("img");
 
-    img.src = `images/${file}`;
-    img.loading = "lazy";
+    img.src = "images/" + file;
 
-    // 처음 6장만 노출
-    if(index >= 6){
+    if(index >= 9){
         img.classList.add("hidden");
     }
 
-    // 클릭 시 원본 비율 보기
-    img.addEventListener("click", () => {
+    img.addEventListener("click", ()=>{
 
-        viewer.style.display = "flex";
-        viewerImage.src = img.src;
+        openViewer(index);
 
     });
 
@@ -63,43 +61,79 @@ files.forEach((file, index) => {
 
 });
 
-// MORE 버튼
-moreBtn.addEventListener("click", () => {
+// MORE
+moreBtn.addEventListener("click",()=>{
 
-    document.querySelectorAll(".hidden").forEach(img => {
+    document
+    .querySelectorAll(".hidden")
+    .forEach(img=>{
 
         img.classList.remove("hidden");
 
     });
 
-    moreBtn.style.display = "none";
+    moreBtn.style.display="none";
 
 });
 
-// 닫기
-closeViewer.addEventListener("click", () => {
 
-    viewer.style.display = "none";
+// Viewer 생성
+
+files.forEach(file=>{
+
+    const slide=document.createElement("div");
+
+    slide.className="swiper-slide";
+
+    slide.innerHTML=
+    `<img src="images/${file}">`;
+
+    wrapper.appendChild(slide);
 
 });
 
-viewer.addEventListener("click",(e)=>{
+function openViewer(index){
 
-    if(e.target===viewer){
+    viewer.style.display="flex";
 
-        viewer.style.display="none";
+    if(swiper){
+
+        swiper.destroy(true,true);
 
     }
 
-});
+    swiper=new Swiper(".swiper",{
 
-// ESC 키
-window.addEventListener("keydown",(e)=>{
+        initialSlide:index,
 
-    if(e.key==="Escape"){
+        speed:400,
 
-        viewer.style.display="none";
+        spaceBetween:0,
 
-    }
+        on:{
 
-});
+            init(){
+
+                counter.innerText=
+                `${this.activeIndex+1} / ${files.length}`;
+
+            },
+
+            slideChange(){
+
+                counter.innerText=
+                `${this.activeIndex+1} / ${files.length}`;
+
+            }
+
+        }
+
+    });
+
+}
+
+closeBtn.onclick=()=>{
+
+    viewer.style.display="none";
+
+}
