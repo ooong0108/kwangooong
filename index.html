@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding Gallery</title>
 
-  <link rel="stylesheet" href="style.css">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Gallery</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-  <!-- Header -->
-  <header class="hero">
-      <img src="gallery_header.png" alt="Wedding Gallery">
-  </header>
+<header class="hero">
+    <img src="gallery_header.png">
+</header>
 
-  <!-- Gallery -->
-  <main>
+<div id="gallery" class="gallery"></div>
 
-      <section id="gallery" class="gallery">
+<button id="moreBtn">
+∨ MORE
+</button>
 
-      </section>
+<div id="lightbox">
 
-      <div class="more-wrap">
-          <button id="moreBtn">
-              MORE
-          </button>
-      </div>
+<img id="lightboxImg">
 
-  </main>
-
-  <!-- Viewer -->
-
-  <div id="viewer" class="viewer">
-
-      <span id="closeViewer">&times;</span>
-
-      <img id="viewerImage">
-
-  </div>
+</div>
 
 <script src="script.js"></script>
 
