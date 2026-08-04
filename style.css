@@ -1,6 +1,4 @@
-/* ===========================
-   RESET
-=========================== */
+/* ---------- RESET ---------- */
 
 *{
     margin:0;
@@ -16,6 +14,7 @@ body{
 
     background:#faf8f5;
     color:#333;
+
     font-family:'Pretendard',sans-serif;
 
     overflow-x:hidden;
@@ -31,75 +30,37 @@ img{
 
 a{
 
-    text-decoration:none;
     color:inherit;
+    text-decoration:none;
 
 }
 
-/* ===========================
-BACKGROUND
-=========================== */
-
-.background{
-
-    position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(circle at top,
-    rgba(255,255,255,.8),
-    rgba(248,244,239,.95));
-
-    z-index:-1;
-
-}
-
-/* ===========================
-MAIN
-=========================== */
-
-main{
-
-    width:100%;
-    max-width:520px;
-
-    margin:auto;
-
-}
-
-/* ===========================
-HERO
-=========================== */
+/* ---------- HERO ---------- */
 
 .hero{
 
-    min-height:90vh;
+    min-height:100vh;
 
     display:flex;
 
-    flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
 
     text-align:center;
 
-    padding:40px 25px;
+    padding:40px;
 
 }
 
-.hero .sub{
-
-    letter-spacing:6px;
-
-    text-transform:uppercase;
-
-    font-size:12px;
+.hero .small{
 
     color:#999;
 
-    margin-bottom:25px;
+    letter-spacing:6px;
+
+    font-size:12px;
+
+    margin-bottom:20px;
 
 }
 
@@ -107,41 +68,39 @@ HERO
 
     font-family:'Noto Serif KR',serif;
 
+    font-size:42px;
+
+    line-height:1.7;
+
     font-weight:400;
-
-    line-height:1.8;
-
-    font-size:36px;
 
 }
 
 .hero h1 span{
 
-    color:#d8b27d;
+    display:block;
 
-    font-size:30px;
+    color:#cfa86f;
+
+    font-size:32px;
 
 }
 
 .hero .date{
 
-    margin-top:45px;
+    margin-top:30px;
 
     color:#777;
 
     letter-spacing:3px;
 
-    font-size:14px;
-
 }
 
-/* ===========================
-INTRO
-=========================== */
+/* ---------- INTRO ---------- */
 
 .intro{
 
-    padding:80px 35px;
+    padding:80px 25px;
 
     text-align:center;
 
@@ -151,7 +110,7 @@ INTRO
 
     font-family:'Noto Serif KR',serif;
 
-    font-size:26px;
+    font-size:30px;
 
     font-weight:400;
 
@@ -165,13 +124,9 @@ INTRO
 
     line-height:2;
 
-    font-size:15px;
-
 }
 
-/* ===========================
-GALLERY
-=========================== */
+/* ---------- GALLERY ---------- */
 
 .gallery{
 
@@ -179,7 +134,7 @@ GALLERY
 
 }
 
-.grid{
+#gallery{
 
     column-count:2;
 
@@ -187,25 +142,21 @@ GALLERY
 
 }
 
-/* ===========================
-PHOTO
-=========================== */
-
 .photo{
-
-    position:relative;
-
-    width:100%;
 
     display:inline-block;
 
+    width:100%;
+
     margin-bottom:10px;
+
+    cursor:pointer;
 
     overflow:hidden;
 
     border-radius:18px;
 
-    cursor:pointer;
+    break-inside:avoid;
 
     background:#eee;
 
@@ -213,7 +164,11 @@ PHOTO
 
 .photo img{
 
-    transition:.45s;
+    width:100%;
+
+    display:block;
+
+    transition:.35s;
 
 }
 
@@ -223,55 +178,9 @@ PHOTO
 
 }
 
-.photo::after{
+/* ---------- VIEWER ---------- */
 
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:rgba(0,0,0,.05);
-
-    opacity:0;
-
-    transition:.3s;
-
-}
-
-.photo:hover::after{
-
-    opacity:1;
-
-}
-
-/* ===========================
-FADE
-=========================== */
-
-.fade{
-
-    opacity:0;
-
-    transform:translateY(25px);
-
-    transition:.7s;
-
-}
-
-.fade.show{
-
-    opacity:1;
-
-    transform:none;
-
-}
-
-/* ===========================
-LIGHTBOX
-=========================== */
-
-#lightbox{
+#viewer{
 
     position:fixed;
 
@@ -287,345 +196,106 @@ LIGHTBOX
 
     z-index:9999;
 
-    overflow:hidden;
-
 }
 
-#lightbox.active{
+#viewer.active{
 
     display:flex;
 
 }
 
-#lightbox-image{
+#viewer img{
 
-    max-width:94%;
+    max-width:92%;
 
-    max-height:86%;
-
-    border-radius:10px;
+    max-height:85%;
 
     object-fit:contain;
 
-    transition:.25s;
+}
+
+/* ---------- BUTTON ---------- */
+
+#close{
+
+    position:absolute;
+
+    top:20px;
+    right:25px;
+
+    color:white;
+
+    font-size:34px;
+
+    cursor:pointer;
 
 }
 
-/* ===========================
-BUTTON
-=========================== */
-
-#close,
 #prev,
 #next{
 
     position:absolute;
-
-    border:none;
-
-    background:rgba(255,255,255,.15);
-
-    color:#fff;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-#close:hover,
-#prev:hover,
-#next:hover{
-
-    background:rgba(255,255,255,.3);
-
-}
-/* ===========================
-LIGHTBOX CONTROLS
-=========================== */
-
-#close{
-
-    top:20px;
-    right:20px;
-
-    width:44px;
-    height:44px;
-
-    border-radius:50%;
-
-    font-size:20px;
-
-    z-index:10002;
-
-}
-
-#prev,
-#next{
 
     top:50%;
 
     transform:translateY(-50%);
 
-    width:48px;
-    height:48px;
+    color:white;
 
-    border-radius:50%;
+    font-size:45px;
 
-    font-size:28px;
+    cursor:pointer;
 
-    z-index:10001;
+    user-select:none;
 
 }
 
 #prev{
 
-    left:16px;
+    left:15px;
 
 }
 
 #next{
 
-    right:16px;
+    right:15px;
 
 }
 
-/* ===========================
-COUNTER
-=========================== */
-
-#counter{
+#count{
 
     position:absolute;
 
-    bottom:24px;
+    bottom:25px;
+
     left:50%;
 
     transform:translateX(-50%);
 
-    color:#fff;
+    color:white;
 
-    font-size:14px;
-
-    letter-spacing:2px;
+    background:rgba(255,255,255,.15);
 
     padding:8px 16px;
 
-    background:rgba(0,0,0,.35);
-
-    border-radius:999px;
-
-    backdrop-filter:blur(8px);
-
-    -webkit-backdrop-filter:blur(8px);
+    border-radius:30px;
 
 }
 
-/* ===========================
-IMAGE ANIMATION
-=========================== */
+/* ---------- MOBILE ---------- */
 
-.photo img{
-
-    opacity:0;
-
-    transform:scale(.98);
-
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
-
-}
-
-.photo.loaded img{
-
-    opacity:1;
-
-    transform:scale(1);
-
-}
-
-/* ===========================
-SCROLL ANIMATION
-=========================== */
-
-.reveal{
-
-    opacity:0;
-
-    transform:translateY(30px);
-
-    transition:
-
-        opacity .8s ease,
-        transform .8s ease;
-
-}
-
-.reveal.active{
-
-    opacity:1;
-
-    transform:none;
-
-}
-
-/* ===========================
-LOADING
-=========================== */
-
-.photo::before{
-
-    content:"";
-
-    display:block;
-
-    width:100%;
-
-    padding-top:145%;
-
-    background:#ececec;
-
-}
-
-.photo img{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-}
-
-/* ===========================
-SCROLL BAR
-=========================== */
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#d4c2a5;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:transparent;
-
-}
-
-/* ===========================
-SAFE AREA
-=========================== */
-
-@supports(padding:max(0px)){
-
-body{
-
-padding-left:max(0px,env(safe-area-inset-left));
-
-padding-right:max(0px,env(safe-area-inset-right));
-
-padding-bottom:max(0px,env(safe-area-inset-bottom));
-
-}
-
-}
-
-/* ===========================
-TABLET
-=========================== */
-
-@media (min-width:768px){
-
-main{
-
-max-width:700px;
-
-}
-
-.grid{
-
-column-count:3;
-
-column-gap:14px;
-
-}
+@media(max-width:500px){
 
 .hero h1{
 
-font-size:48px;
+font-size:34px;
+
+}
+
+.hero h1 span{
+
+font-size:26px;
 
 }
 
 }
-
-/* ===========================
-MOBILE
-=========================== */
-
-@media (max-width:500px){
-
-.hero{
-
-padding:80px 24px;
-
-}
-
-.hero h1{
-
-font-size:30px;
-
-}
-
-.intro{
-
-padding:70px 24px;
-
-}
-
-#prev,
-#next{
-
-width:40px;
-height:40px;
-
-font-size:22px;
-
-}
-
-}
-
-/* ===========================
-PERFORMANCE
-=========================== */
-
-.photo{
-
-will-change:transform;
-
-contain:layout paint;
-
-}
-
-#lightbox-image{
-
-will-change:transform;
-
-}
-
-/* ===========================
-END
-=========================== */
