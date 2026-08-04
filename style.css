@@ -1,52 +1,206 @@
-body{
+/* ===========================
+   RESET
+=========================== */
+
+*{
     margin:0;
-    background:#f7f3ec;
-    font-family:Georgia, serif;
+    padding:0;
+    box-sizing:border-box;
 }
+
+body{
+
+    background:#f8f5ef;
+
+    color:#222;
+
+    font-family:
+    "Cormorant Garamond",
+    "Noto Serif KR",
+    serif;
+
+}
+
+/* ===========================
+   HEADER
+=========================== */
 
 .hero{
-    padding:80px 20px;
-    text-align:center;
+
+    width:100%;
+
+    margin:0 auto;
+
 }
 
-.hero h1{
-    font-size:64px;
-    font-weight:400;
-    letter-spacing:2px;
+.hero img{
+
+    width:100%;
+
+    display:block;
+
 }
+
+/* ===========================
+   GALLERY
+=========================== */
 
 .gallery{
-    max-width:1100px;
-    margin:80px auto;
+
+    width:min(1100px,92%);
+
+    margin:70px auto;
+
     display:grid;
+
     grid-template-columns:repeat(2,1fr);
-    gap:22px;
-    padding:0 20px;
+
+    gap:26px;
+
 }
 
 .gallery img{
+
     width:100%;
+
     height:auto;
+
     display:block;
-    object-fit:contain;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
 }
 
+.gallery img:hover{
+
+    transform:translateY(-4px);
+
+}
+
+/* 처음 6장 이후 */
+
 .hidden{
+
     display:none;
+
+}
+
+/* ===========================
+   MORE BUTTON
+=========================== */
+
+.more-wrap{
+
+    text-align:center;
+
+    margin-bottom:100px;
+
 }
 
 #moreBtn{
-    display:block;
-    margin:50px auto 100px;
-    background:none;
+
+    background:white;
+
     border:1px solid #222;
-    padding:14px 40px;
-    font-size:14px;
-    letter-spacing:3px;
+
+    padding:15px 45px;
+
+    letter-spacing:4px;
+
+    font-size:13px;
+
     cursor:pointer;
+
+    transition:.3s;
+
 }
 
 #moreBtn:hover{
+
     background:#222;
-    color:#fff;
+
+    color:white;
+
+}
+
+/* ===========================
+   VIEWER
+=========================== */
+
+.viewer{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.88);
+
+    z-index:999;
+
+    padding:30px;
+
+}
+
+.viewer img{
+
+    max-width:92vw;
+
+    max-height:92vh;
+
+    width:auto;
+
+    height:auto;
+
+    object-fit:contain;
+
+}
+
+#closeViewer{
+
+    position:absolute;
+
+    top:30px;
+
+    right:40px;
+
+    color:white;
+
+    font-size:44px;
+
+    cursor:pointer;
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.gallery{
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+
+    margin:40px auto;
+
+}
+
+#moreBtn{
+
+    width:180px;
+
+}
+
 }
